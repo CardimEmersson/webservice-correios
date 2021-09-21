@@ -26,7 +26,7 @@ require_once('rastrear.class.php');
 // FORM
 $user = isset($_POST['user']) ? $_POST['user'] : 'ECT';
 $password = isset($_POST['password']) ? $_POST['password'] : 'SRO';
-$code = isset($_POST['code']) ? 'QF566633470BR' : 'QF566633470BR';
+$code = isset($_POST['code']) ? $_POST['code'] : '';
 
 echo $code;
 
