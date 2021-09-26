@@ -1,0 +1,21 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [{
+    "name": "",
+    "email": "emerssoncardim@gmail.com"
+  }],
+  "config": {
+    "vendor-dir": "vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "Source\\": "source/"
+    }
+  },
+  "require": {
+    "league/oauth2-google": "^4.0"
+  }
+}

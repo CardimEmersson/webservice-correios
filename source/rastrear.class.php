@@ -142,7 +142,7 @@ class Rastrear
 
         $client = new SoapClient( self::$wsdl );
         $eventos = $client->buscaEventos( $_evento );
-
+        
         // sempre retorna objeto por padrao, mesmo em caso de erros.
         return ($eventos->return->qtd == 1) ? 
         	$eventos->return->objeto:
@@ -173,4 +173,3 @@ class Rastrear
     }
 
 } // fim da classe Rastrear
-

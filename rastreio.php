@@ -1,6 +1,6 @@
 <?php
 
-require_once('rastrear.class.php');
+require_once('./source/rastrear.class.php');
 
 /**
  * Abaixo segue exemplo de uso desta classe. 
@@ -9,73 +9,23 @@ require_once('rastrear.class.php');
  * nas documentacoes do sistema.
  */
 
+// FORM
+$user = isset($_POST['user']) ? $_POST['user'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$code = isset($_POST['code']) ? $_POST['code'] : '';
+
 # setando os parametros de inicialização
-// $_params = array( 'user' => 'ECT', 'pass' => 'SRO', 'tipo' => 'L', 'resultado' => 'T', 'idioma' => 101);
+// Ex: array( 'user' => 'ECT', 'pass' => 'SRO', 'tipo' => 'L', 'resultado' => 'T', 'idioma' => 101)
+$_params = array('user' => $user, 'pass' => $password, 'tipo' => 'L', 'resultado' => 'T', 'idioma' => 101);
 
 # iniciando objeto. 
 # note que: mesmo que nao sejam passados parametros, 
 # a classe deve funcionar corretamente com os parametros defaults.
-// Rastrear::init( $_params );
-
-# rastreando um objeto hipotetico
-// $obj = Rastrear::get('QF566633470BR');
-
-# verificando se retornou erro 
-# os erros normalmente indicam um objeto nao encontrado
-
-// FORM
-$user = isset($_POST['user']) ? $_POST['user'] : 'ECT';
-$password = isset($_POST['password']) ? $_POST['password'] : 'SRO';
-$code = isset($_POST['code']) ? $_POST['code'] : '';
-
-echo $code;
-
-$_params = array('user' => $user, 'pass' => $password, 'tipo' => 'L', 'resultado' => 'T', 'idioma' => 101);
-
 Rastrear::init($_params);
 
+# rastreando um objeto hipotetico ex: 'QF566633470BR'
 $obj = Rastrear::get($code);
 
-if (isset($obj->erro))
-    die($obj->erro);
+$_REQUEST["objetoRastreio"] = $obj;
 
-# Visualizando dados basicos do objeto
-echo "NUMERO: "    . $obj->numero . "<br>";
-echo "SIGLA: "     . $obj->sigla . "<br>";
-echo "NOME: "      . $obj->nome . "<br>";
-echo "CATEGORIA: " . $obj->categoria . "<br>";
-
-// NOTA: Caso objeto rastreado possua apenas 1 evento, 
-// Correios retorna o evento dentro de um Object e não um Array.
-if (is_object($obj->evento)) :
-    $tmp = array();
-    $tmp[] = $obj->evento;
-    $obj->evento = $tmp;
-endif;
-
-# percorrendo os eventos ocorridos com o objeto
-foreach ($obj->evento as $ev) :
-
-    echo "TIPO: "   . $ev->tipo   . "<br>";
-    echo "STATUS: " . $ev->status . "<br>";
-    echo "DATA: "   . $ev->data   . "<br>";
-    echo "HORA: "   . $ev->hora   . "<br>";
-    echo "DESCRICAO: " . $ev->descricao . "<br>";
-    if (isset($ev->detalhe))
-        echo "DETALHE: " . $ev->detalhe . "<br>";
-    echo "LOCAL: "  . $ev->local  . "<br>";
-    echo "CODIGO: " . $ev->codigo . "<br>";
-    echo "CIDADE: " . $ev->cidade . "<br>";
-    echo "UF: "     . $ev->uf     . "<br>";
-
-    if (isset($ev->destino)) :
-        echo " DESTINO (LOCAL): "  . $ev->destino->local . "<br>";
-        echo " DESTINO (CODIGO): " . $ev->destino->codigo . "<br>";
-        echo " DESTINO (CIDADE): " . $ev->destino->cidade . "<br>";
-        echo " DESTINO (BAIRRO): " . $ev->destino->bairro . "<br>";
-        echo " DESTINO (UF): "     . $ev->destino->uf . "<br>";
-    endif;
-
-    echo "<hr>";
-
-endforeach;
+require("index.php");
