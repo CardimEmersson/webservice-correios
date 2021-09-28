@@ -8,7 +8,7 @@
     $googleData = new Google([
       'clientId'     => '646872545514-kbr9okrht0pjsh1rlq7fp6egdmbk627r.apps.googleusercontent.com',
       'clientSecret' => 'qR5I2i7M-2Wcl8ZoG2XwJdXc',
-      'redirectUri'  => 'http://localhost/correios',
+      'redirectUri'  => 'http://localhost/webservice-correios',
     ]);
     $authUrl = $googleData->getAuthorizationUrl();
     $error = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRING);
@@ -20,7 +20,7 @@
       ]);
       
       $_SESSION["loginGoogle"] = serialize($googleData->getResourceOwner($token));
-      header("Location: http://localhost/correios");
+      header("Location: http://localhost/webservice-correios");
       exit();
     }
   } else {
@@ -48,7 +48,7 @@
       <img class="user-profile" src='<?php echo $user->getAvatar(); ?>' alt='<?php echo $user->getFirstName() ?>' />
       <h2 class="user-name"><?php echo $user->getName() ?></h2>
     </div>
-    <a href="http://localhost/correios/source/logout.php" class="logout-button">Sair</a>
+    <a href="http://localhost/webservice-correios/source/logout.php" class="logout-button">Sair</a>
   </header>
   <?php } ?>
   <main>

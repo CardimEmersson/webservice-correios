@@ -1,6 +1,6 @@
 <div class="form-tracking">
   <h1 class="title">Webservice Rastreio - Formulário</h1>
-  <form action="/correios/rastreio.php" method="POST" onsubmit="disableButton()">
+  <form action="/webservice-correios/rastreio.php" method="POST" onsubmit="disableButton()">
     <div class="input-container">
       <label for="user">Usuário</label>
       <input type="text" name="user" id="user" placeholder="Digite seu usuário" required />
